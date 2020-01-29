@@ -52,9 +52,24 @@ public class ReductionMain {
 		//크기 비교가 가능한 데이터는 속성을 하나만 가진 데이터들입니다.
 		//기본 자료형, 문자열, 날짜 정도가 하나의 데이터만을 가진 자료형입니다.
 		
+		//String은 크기 비교가 가능하기 때문에 바로 오름차순 정렬
 		arStream = Arrays.stream(ar);
+		arStream.sorted().forEach(System.out::println);
 		
-
+		System.out.println();
+		stream = list.stream();
+		//Student는 여러 개의 항목을 소유하고 있기 때문에 어떤 항목으로 크기 비교를 할 지 알지 못하기 때문에 예외가 발생
+		//stream.sorted().forEach(System.out::println);
+		
+		//크기 비교하는 메소드를 만들어서 정렬
+		//크기 비교를 할 때는 2개의 매개변수를 가지고 정수를 리턴하는 메소드를 만들면 됩니다.
+		//양수를 리턴하면 앞의 데이터가 크다고 간주하고 0이면 같다고 음수이면 뒤의 데이터가 크다고 간주
+		
+		//숫자 데이터를 이용해서 비교하는 경우 - 오름차순
+		//stream.sorted((a, b) -> {return a.getScore() - b.getScore();}).forEach(System.out::println);
+		
+		//문자열인 경우는 compareTo 를 이용 - 앞 뒤 순서를 변경하면 내림차순
+		stream.sorted((a, b) -> {return b.getName().compareTo(a.getName());}).forEach(System.out::println);
 	}
 
 }
